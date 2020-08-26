@@ -9,8 +9,5 @@ RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -ldflags="-w -s" -o main .
 
 FROM scratch
 COPY --from=build app/main .
-
-WORKDIR /src
-COPY --from=build app/template.html src/
-
+COPY --from=build app/template.html .
 CMD ["/main"]

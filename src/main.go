@@ -2,7 +2,6 @@ package main
 import (
   "html/template"
   "net/http"
-  "path"
   "log"
   "fmt"
 )
@@ -20,8 +19,7 @@ func main() {
 }
 
 func renderTemplate(w http.ResponseWriter, r *http.Request) {
-	fp := path.Join("src", "template.html")
-	tmpl, err := template.ParseFiles(fp)
+	tmpl, err := template.ParseFiles("template.html")
   if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
     return
