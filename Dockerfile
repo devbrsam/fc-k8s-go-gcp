@@ -11,6 +11,6 @@ FROM scratch
 COPY --from=build app/main .
 
 RUN mkdir /src
-COPY --from=build app/template.html ./src
+COPY --from=build app/template.html src/
 
 CMD ["/main"]
