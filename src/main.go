@@ -3,6 +3,7 @@ import (
   "html/template"
   "net/http"
   "path"
+  "log"
 )
 
 type Content struct {
