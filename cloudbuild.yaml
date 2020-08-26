@@ -1,0 +1,23 @@
+steps:
+
+- id: "running tests"
+  name: golang #'gcr.io/cloud-builders/go:alpine'
+  args: ['go', 'test', '-v', './src']
+ 
+- id: "build image"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'devbrsam/fc-go-greeting:0.0.1','.']
+
+- id: "get secrets"
+  name: gcr.io/cloud-builders/gcloud
+  entrypoint: 'bash'
+  args: [ '-c', "gcloud secrets versions access latest --secret=dh-secret-data --format='get(payload.data)' | tr '_-' '/+' | base64 -d > decrypted-dh-data.txt" ]
+
+- id: "dockerhub login"
+  name: gcr.io/cloud-builders/docker
+  entrypoint: 'bash'
+  args: [ '-c', 'docker login --username=devbrsam --password-stdin < decrypted-dh-data.txt']
+
+- id: "push image to registry"
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'devbrsam/fc-go-greeting:0.0.1']
