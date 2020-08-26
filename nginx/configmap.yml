@@ -11,7 +11,7 @@ data:
       
       rewrite ^/google$ http://google.com permanent;
 
-      location {
+      location /{
           return 200 'Code.education Rocks.';
           add_header Content-Type text/plain;
       }

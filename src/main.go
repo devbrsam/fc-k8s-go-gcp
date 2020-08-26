@@ -20,7 +20,7 @@ func main() {
 }
 
 func renderTemplate(w http.ResponseWriter, r *http.Request) {
-	fp := path.Join("go", "src", "template.html")
+	fp := path.Join("src", "template.html")
 	tmpl, err := template.ParseFiles(fp)
   if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
