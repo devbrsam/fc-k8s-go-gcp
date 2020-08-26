@@ -5,8 +5,9 @@ WORKDIR /app
 COPY src/ .
 
 #RUN go build -o main .
-RUN GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o main .
+RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -ldflags="-w -s" -o main .
 
 FROM scratch
 COPY --from=build app/main .
+COPY --from=build app/template.html .
 CMD ["/main"]
