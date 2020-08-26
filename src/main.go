@@ -14,8 +14,8 @@ type Content struct {
 func main() {
   log.Print("starting server...")
 	http.HandleFunc("/", renderTemplate)
-  http.ListenAndServe(":8000", nil)
   log.Printf("listening on port %s", "8000")
+  http.ListenAndServe(":8000", nil)
   log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", "8000"), nil))
 }
 
