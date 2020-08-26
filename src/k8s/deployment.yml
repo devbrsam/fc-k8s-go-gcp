@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-greeting-dpy
+spec:
+  selector:
+     matchLabels:
+       app: go-greeting-dpy
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: go-greeting-dpy
+    spec:
+      containers:
+      - name: go-greeting-pod
+        image: devbrsam/fc-go-greeting:0.0.1
+        ports:
+        - containerPort: 8000
