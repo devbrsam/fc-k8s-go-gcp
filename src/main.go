@@ -4,6 +4,7 @@ import (
   "net/http"
   "path"
   "log"
+  "fmt"
 )
 
 type Content struct {
@@ -15,7 +16,7 @@ func main() {
 	http.HandleFunc("/", renderTemplate)
   http.ListenAndServe(":8000", nil)
   log.Printf("listening on port %s", "8000")
-  log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
+  log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", "8000"), nil))
 }
 
 func renderTemplate(w http.ResponseWriter, r *http.Request) {
